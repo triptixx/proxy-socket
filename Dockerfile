@@ -65,4 +65,4 @@ EXPOSE 2375/TCP
 #HEALTHCHECK --start-period=10s --timeout=5s \
 #    CMD 
 
-CMD ["haproxy", "-f", "/haproxy/haproxy.cfg"]
+CMD ["/haproxy/sbin/haproxy", "-f", "/haproxy/haproxy.cfg"]
