@@ -66,4 +66,4 @@ EXPOSE 2375/TCP
 HEALTHCHECK --start-period=10s --timeout=5s \
     CMD wget -qO /dev/null "http://localhost:2375/_ping"
 
-CMD ["/haproxy/sbin/haproxy", "-f", "/haproxy/haproxy.cfg"]
+CMD ["/haproxy/sbin/haproxy", "-W", "-db", "-f", "/haproxy/haproxy.cfg"]
