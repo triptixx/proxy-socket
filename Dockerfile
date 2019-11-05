@@ -20,3 +20,4 @@ RUN apk add --no-cache build-base linux-headers lua5.3-dev pcre2-dev openssl-dev
 FROM loxoo/alpine:${ALPINE_TAG}
 
 ARG HAPROXY_VER
+ENV SUID=901 SGID=901
