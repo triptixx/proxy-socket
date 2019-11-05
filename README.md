@@ -26,6 +26,51 @@ docker run -d \
 
 ## Environment
 
+### Access granted by default
+
+These API sections are mostly harmless and almost required for any service that
+uses the API, so they are granted by default.
+
+- `EVENTS`
+- `PING`
+- `VERSION`
+
+### Access revoked by default
+
+#### Security-critical
+
+These API sections are considered security-critical, and thus access is revoked
+by default. Maximum caution when enabling these.
+
+- `AUTH`
+- `SECRETS`
+- `POST`: When disabled, only `GET` and `HEAD` operations are allowed, meaning
+  any section of the API is read-only.
+
+#### Not always needed
+
+You will possibly need to grant access to some of these API sections, which are
+not so extremely critical but can expose some information that your service
+does not need.
+
+- `BUILD`
+- `COMMIT`
+- `CONFIGS`
+- `CONTAINERS`
+- `DISTRIBUTION`
+- `EXEC`
+- `IMAGES`
+- `INFO`
+- `NETWORKS`
+- `NODES`
+- `PLUGINS`
+- `SERVICES`
+- `SESSION`
+- `SWARM`
+- `SYSTEM`
+- `TASKS`
+- `VOLUMES`
+
 - `$LOG_LEVEL`    - Logging severity levels. _default: `info`_
 - `$TZ`           - Timezone. _optional_
 
