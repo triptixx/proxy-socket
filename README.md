@@ -20,30 +20,19 @@ docker run -d \
     --hostname=srvproxy-socket \
     --privileged \
     -p 127.0.0.1:2375:2375 \
-    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /var/run/docker.sock:/var/run/docker.sock:ro \
     loxoo/proxy-socket
 ```
 
 ## Environment
 
-- `$SUID`         - User ID to run as. _default: `901`_
-- `$SGID`         - Group ID to run as. _default: `901`_
-- `$DOMAIN`       - Domain master zone. _required_
-- `$NS2`          - Fqdn name of slave server zone. _required_
-- `$MX`           - Name of mail server. _optional_
-- `$CNAME`        - Name of different subdomain. Separated by commas. _optional_
-- `$ENDPOINT`     - Name server of Gandi API. _optional_
-- `$APIKEY`       - Authentication Gandi API Key. _optional_
 - `$LOG_LEVEL`    - Logging severity levels. _default: `info`_
 - `$TZ`           - Timezone. _optional_
 
 ## Volume
 
-- `/rundir`       - A path for storing run-time data.
-- `/storage`      - A data directory for storing zone files, journal database, and timers database.
-- `/config`       - Server configuration file location.
+- `/var/run/docker.sock`       - A path for the UNIX socket of Docker daemon.
 
 ## Network
 
-- `53/udp`        - Dns port udp.
-- `53/tcp`        - Dns port tcp.
+- `2375/tcp`        - Tcp socket listening port.
