@@ -20,8 +20,9 @@ jobs:
         with:
           verbose: true
           repo: proxy-socket-dev
-          run_args: -v /var/run/docker.sock:/var/run/docker.sock:ro
-          curl: ':2375/version'
+          run_args: --privileged -v /var/run/docker.sock:/var/run/docker.sock:ro
+          curl: ':2375/_ping'
+          pipe: grep -qw 'OK'
       - name: publish
         uses: triptixx/action-docker-publish@master
         with:
