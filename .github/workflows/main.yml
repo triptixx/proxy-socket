@@ -1,0 +1,32 @@
+name: docker build
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  proxy-socket:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone
+        uses: actions/checkout@master
+      - name: build
+        uses: triptixx/action-docker-build@master
+        with:
+          repo: proxy-socket-dev
+          make: true
+      - name: test
+        uses: triptixx/action-docker-test@master
+        with:
+          verbose: true
+          repo: proxy-socket-dev
+          run_args: -v /var/run/docker.sock:/var/run/docker.sock:ro
+          curl: ':2375/version'
+      - name: publish
+        uses: triptixx/action-docker-publish@master
+        with:
+          docker_username: ${{ secrets.docker_username }}
+          docker_password: ${{ secrets.docker_password }}
+          from: proxy-socket-dev
+          repo: ${{ secrets.docker_username }}/proxy-socket
+          tags: latest,%label org.label-schema.version | %auto
