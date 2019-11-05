@@ -23,8 +23,7 @@ COPY *.cfg /output/haproxy/
 FROM loxoo/alpine:${ALPINE_TAG}
 
 ARG HAPROXY_VER
-ENV SUID=902 SGID=902 \
-    ALLOW_RESTARTS=0 \
+ENV ALLOW_RESTARTS=0 \
     AUTH=0 \
     BUILD=0 \
     COMMIT=0 \
