@@ -3,7 +3,7 @@
 [git]: https://github.com/triptixx/proxy-socket
 [actions]: https://github.com/triptixx/proxy-socket/actions
 
-# [loxoo/knot][hub]
+# [loxoo/proxy-socket][hub]
 [![Layers](https://images.microbadger.com/badges/image/loxoo/proxy-socket.svg)][mbdg]
 [![Latest Version](https://images.microbadger.com/badges/version/loxoo/proxy-socket.svg)][hub]
 [![Git Commit](https://images.microbadger.com/badges/commit/loxoo/proxy-socket.svg)][git]
@@ -15,34 +15,13 @@
 
 ```shell
 docker run -d \
-    --name=srvknot \
+    --name=srvproxy-socket \
     --restart=unless-stopped \
-    --hostname=srvknot \
-    -p 53:53 \
-    -p 53:53/udp \
-    -e DOMAIN=example.com \
-    -e NS2=ns2.gandi.net \
-    -v $PWD/config:/config \
-    -v $PWD/storage:/storage \
-    -v $PWD/rundir:/rundir \
-    loxoo/knot
-```
-If you subscribe to the Gandi registrar, you can use the $ENDPOINT and $APIKEY variables that will trigger a cron configuration to automate DNSSEC registration tasks :
-```shell
-docker run -d \
-    --name=srvknot \
-    --restart=unless-stopped \
-    --hostname=srvknot \
-    -p 53:53 \
-    -p 53:53/udp \
-    -e DOMAIN=example.com \
-    -e NS2=ns2.gandi.net \
-    -e ENDPOINT=https://rpc.gandi.net/xmlrpc/ \
-    -e APIKEY=XXXXXXXX... \
-    -v $PWD/config:/config \
-    -v $PWD/storage:/storage \
-    -v $PWD/rundir:/rundir \
-    loxoo/knot
+    --hostname=srvproxy-socket \
+    --privileged \
+    -p 127.0.0.1:2375:2375 \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    loxoo/proxy-socket
 ```
 
 ## Environment
