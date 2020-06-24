@@ -7,7 +7,7 @@ ARG HAPROXY_VER
 
 ### install haaproxy
 WORKDIR /haproxy-src
-RUN apk add --no-cache build-base linux-headers lua5.3-dev pcre2-dev openssl-dev libexecinfo-dev; \
+RUN apk add --no-cache build-base linux-headers lua5.3-dev pcre2-dev openssl-dev libexecinfo libexecinfo-dev; \
     wget -O- http://www.haproxy.org/download/${HAPROXY_VER:0:3}/src/haproxy-${HAPROXY_VER}.tar.gz \
         | tar xz --strip-components=1; \
     make all TARGET=linux-glibc USE_GETADDRINFO=1 USE_LUA=1 LUA_INC=/usr/include/lua5.3 \
