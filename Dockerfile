@@ -7,12 +7,13 @@ ARG HAPROXY_VER
 
 ### install haaproxy
 WORKDIR /haproxy-src
-RUN apk add --no-cache build-base linux-headers lua5.3-dev pcre2-dev openssl-dev libexecinfo libexecinfo-dev; \
+RUN apk add --no-cache build-base linux-headers lua5.3-dev openssl-dev pcre2-dev; \
     wget -O- http://www.haproxy.org/download/${HAPROXY_VER:0:3}/src/haproxy-${HAPROXY_VER}.tar.gz \
         | tar xz --strip-components=1; \
-    make all TARGET=linux-glibc USE_GETADDRINFO=1 USE_LUA=1 LUA_INC=/usr/include/lua5.3 \
-        LUA_LIB=/usr/lib/lua5.3 USE_OPENSSL=1 USE_PCRE2=1 USE_PCRE2_JIT=1 USE_ZLIB=1; \
-    make install-bin DESTDIR=/output PREFIX=/haproxy; \
+    makeOpts='TARGET=linux-musl USE_GETADDRINFO=1 USE_LUA=1 LUA_INC=/usr/include/lua5.3 \
+        LUA_LIB=/usr/lib/lua5.3 USE_OPENSSL=1 USE_PCRE2=1 USE_PCRE2_JIT=1 USE_ZLIB=1'; \
+    make all $makeOpts; \
+    make install-bin DESTDIR=/output PREFIX=/haproxy $makeOpts; \
     cp -R examples/errorfiles /output/haproxy/errors; \
     find /output -exec sh -c 'file "{}" | grep -q ELF && strip --strip-debug "{}"' \;
 
