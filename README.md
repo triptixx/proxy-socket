@@ -1,15 +1,14 @@
 [hub]: https://hub.docker.com/r/loxoo/proxy-socket
-[mbdg]: https://microbadger.com/images/loxoo/proxy-socket
-[git]: https://github.com/triptixx/proxy-socket
-[actions]: https://github.com/triptixx/proxy-socket/actions
+[git]: https://github.com/triptixx/proxy-socket/tree/master
+[actions]: https://github.com/triptixx/proxy-socket/actions/workflows/main.yml
 
 # [loxoo/proxy-socket][hub]
-[![Layers](https://images.microbadger.com/badges/image/loxoo/proxy-socket.svg)][mbdg]
-[![Latest Version](https://images.microbadger.com/badges/version/loxoo/proxy-socket.svg)][hub]
-[![Git Commit](https://images.microbadger.com/badges/commit/loxoo/proxy-socket.svg)][git]
+[![Git Commit](https://img.shields.io/github/last-commit/triptixx/proxy-socket/master)][git]
+[![Build Status](https://github.com/triptixx/proxy-socket/actions/workflows/main.yml/badge.svg?branch=master)][actions]
+[![Latest Version](https://img.shields.io/docker/v/loxoo/proxy-socket/latest)][hub]
+[![Size](https://img.shields.io/docker/image-size/loxoo/proxy-socket/latest)][hub]
 [![Docker Stars](https://img.shields.io/docker/stars/loxoo/proxy-socket.svg)][hub]
 [![Docker Pulls](https://img.shields.io/docker/pulls/loxoo/proxy-socket.svg)][hub]
-[![Build Status](https://github.com/triptixx/proxy-socket/workflows/docker%20build/badge.svg)][actions]
 
 ## Usage
 

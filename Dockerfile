@@ -1,5 +1,5 @@
-ARG ALPINE_TAG=3.15
-ARG HAPROXY_VER=2.5.0
+ARG ALPINE_TAG=3.18
+ARG HAPROXY_VER=2.8.0
 
 FROM loxoo/alpine:${ALPINE_TAG} AS builder
 
@@ -12,7 +12,7 @@ RUN apk add --no-cache build-base linux-headers lua5.3-dev openssl-dev pcre2-dev
         | tar xz --strip-components=1; \
     makeOpts='TARGET=linux-musl USE_GETADDRINFO=1 USE_LUA=1 LUA_INC=/usr/include/lua5.3 \
         LUA_LIB=/usr/lib/lua5.3 USE_OPENSSL=1 USE_PCRE2=1 USE_PCRE2_JIT=1 USE_ZLIB=1'; \
-    make all $makeOpts; \
+    make -j$(nproc) all $makeOpts; \
     make install-bin DESTDIR=/output PREFIX=/haproxy $makeOpts; \
     cp -R examples/errorfiles /output/haproxy/errors; \
     find /output -exec sh -c 'file "{}" | grep -q ELF && strip --strip-debug "{}"' \;
