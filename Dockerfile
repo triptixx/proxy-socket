@@ -64,6 +64,6 @@ VOLUME ["/var/run/docker.sock"]
 EXPOSE 2375/TCP
 
 HEALTHCHECK --start-period=10s --timeout=5s \
-    CMD wget -qO /dev/null "http://localhost:2375/_ping"
+    CMD wget -qO /dev/null "http://127.0.0.1:2375/_ping"
 
 CMD ["/haproxy/sbin/haproxy", "-W", "-db", "-f", "/haproxy/haproxy.cfg"]
